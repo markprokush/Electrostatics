@@ -1,4 +1,4 @@
-function [F,X,Y] = DipolePotential(XYZ,Q,D,r0,a,b,Dx,Dy,Nxy)
+function [F,X,Y] = DipolePotential(XYZ,Q,R,D,r0,a,b,Dx,Dy,Nxy)
     n = length(Q);
     e1 = a / ((a(1,1)^2+a(2,1)^2+a(3,1)^2)^0.5);
     c2 = zeros(3,1);
@@ -19,7 +19,7 @@ function [F,X,Y] = DipolePotential(XYZ,Q,D,r0,a,b,Dx,Dy,Nxy)
         for jj = 1:Nxy(2)
             for ll = 1:n
                 if (((r0(1,1) + X(ii, 1) * e1(1,1) + Y(jj, 1) * e2(1,1) - XYZ(ll,1))^2 + (r0(2,1) + X(ii, 1) * e1(2,1) + Y(jj, 1) * e2(2,1) - XYZ(ll,2))^2 + (r0(3,1) + X(ii, 1) * e1(3,1) + Y(jj, 1) * e2(3,1) - XYZ(ll,3))^2)^(0.5) < 1)
-                    F(ii, jj) =  F(ii, jj) + Q(ll,1) / 1;
+                    F(ii, jj) =  F(ii, jj) + Q(ll,1) / R(ll);
                 else
                     F(ii, jj) =  F(ii, jj) + Q(ll,1) / ((r0(1,1) + X(ii, 1) * e1(1,1) + Y(jj, 1) * e2(1,1) - XYZ(ll,1))^2 + (r0(2,1) + X(ii, 1) * e1(2,1) + Y(jj, 1) * e2(2,1) - XYZ(ll,2))^2 + (r0(3,1) + X(ii, 1) * e1(3,1) + Y(jj, 1) * e2(3,1) - XYZ(ll,3))^2)^(0.5) + D(3*ll - 2, 1) * (r0(1,1) + X(ii, 1) * e1(1,1) + Y(jj, 1) * e2(1,1) - XYZ(ll,1)) / ((r0(1,1) + X(ii, 1) * e1(1,1) + Y(jj, 1) * e2(1,1) - XYZ(ll,1))^2 + (r0(2,1) + X(ii, 1) * e1(2,1) + Y(jj, 1) * e2(2,1) - XYZ(ll,2))^2 + (r0(3,1) + X(ii, 1) * e1(3,1) + Y(jj, 1) * e2(3,1) - XYZ(ll,3))^2)^(1.5) + D(3*ll - 1, 1) * (r0(2,1) + X(ii, 1) * e1(2,1) + Y(jj, 1) * e2(2,1) - XYZ(ll,2)) / ((r0(1,1) + X(ii, 1) * e1(1,1) + Y(jj, 1) * e2(1,1) - XYZ(ll,1))^2 + (r0(2,1) + X(ii, 1) * e1(2,1) + Y(jj, 1) * e2(2,1) - XYZ(ll,2))^2 + (r0(3,1) + X(ii, 1) * e1(3,1) + Y(jj, 1) * e2(3,1) - XYZ(ll,3))^2)^(1.5) + D(3*ll, 1) * (r0(3,1) + X(ii, 1) * e1(3,1) + Y(jj, 1) * e2(3,1) - XYZ(ll,3)) / ((r0(1,1) + X(ii, 1) * e1(1,1) + Y(jj, 1) * e2(1,1) - XYZ(ll,1))^2 + (r0(2,1) + X(ii, 1) * e1(2,1) + Y(jj, 1) * e2(2,1) - XYZ(ll,2))^2 + (r0(3,1) + X(ii, 1) * e1(3,1) + Y(jj, 1) * e2(3,1) - XYZ(ll,3))^2)^(1.5);
                 end
