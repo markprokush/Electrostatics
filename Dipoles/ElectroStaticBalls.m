@@ -12,5 +12,6 @@ for ii=1:n
         end
     end
 end
-Q=inv(A)*F;
+[Qu, R] = qr(A);
+Q = R\(Qu'*F);
 end
