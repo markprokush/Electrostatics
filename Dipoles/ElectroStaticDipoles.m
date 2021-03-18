@@ -40,7 +40,8 @@ f=zeros(4*n,1);
 for k=1:n
     f(k)=F(k);
 end
-X=inv(A)*f;
+[Qu, R] = qr(A);
+X = R\(Qu'*f);
 Q=zeros(n,1);
 D=zeros(3*n,1);
 for k=1:n
